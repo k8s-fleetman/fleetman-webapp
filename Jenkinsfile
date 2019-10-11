@@ -34,6 +34,7 @@ pipeline {
            sh 'scp -r ${WORKSPACE} jenkins@${DOCKER_HOST_IP}:/home/jenkins/docker/${BUILD_ID}'
            sh 'ssh jenkins@${DOCKER_HOST_IP} docker image build -t ${IMAGE_TAG} /home/jenkins/docker/${BUILD_ID}'
            sh 'ssh jenkins@${DOCKER_HOST_IP} docker image ls'
+           sh 'ssh jenkins@${DOCKER_HOST_IP} rm -rf /home/jenkins/docker/${BUILD_ID}'
          }
       }
       stage('Push Image to repo') {
@@ -50,7 +51,8 @@ pipeline {
       }
       stage('Deploy to Cluster') {
           steps {
-            sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+            //sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+            sh '''echo Still working on it'''
           }
       }
    }
