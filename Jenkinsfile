@@ -43,12 +43,6 @@ pipeline {
            sh 'ssh jenkins@${DOCKER_HOST_IP} docker push ${REPOSITORY_TAG}'
           }
       }
-      stage('Deploy the Image') {
-          steps {
-           sh 'ssh jenkins@${DOCKER_HOST_IP} docker tag ${IMAGE_TAG} ${REPOSITORY_TAG}'
-           sh 'ssh jenkins@${DOCKER_HOST_IP} docker push ${REPOSITORY_TAG}'
-          }
-      }
       stage('Deploy to Cluster') {
           steps {
             //sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
