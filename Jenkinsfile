@@ -24,8 +24,7 @@ pipeline {
       }
       stage('SonarQube') {
          steps {
-            //sh '''mvn sonar:sonar Dsonar.projectKey=api-gateway -Dsonar.host.url=http://sonarqube.eqslearning.com:9000 -Dsonar.login=6048d8ddd7bca6b0eb9051d5e899ae8ab07f0d45'''
-            sh 'echo $HOSTNAME'
+            sonar-scanner -Dsonar.projectKey=fleet-app -Dsonar.sources=. -Dsonar.host.url=http://sonarqube.eqslearning.com:9000 -Dsonar.login=25f9663ddadfd71eeaf3795ba07e4f0e0004f9b0
          }
       }
       stage('Build Image') {
